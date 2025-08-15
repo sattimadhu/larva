@@ -72,6 +72,6 @@ if uploaded_file is not None:
 # ------------------- FOOTER -------------------
 st.markdown("<hr>", unsafe_allow_html=True)
 st.markdown(
-    "<p style='text-align: center; color: gray;'>Developed with ❤️ using Streamlit & TensorFlow</p>",
+    "<p style='text-align: center; color: gray;'>Developed with Love & Larva</p>",
     unsafe_allow_html=True
 )
