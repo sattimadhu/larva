@@ -45,10 +45,6 @@ img_size = (width, height)
 st.markdown("<h1 style='text-align:center; color: #4CAF50;'>YouLarva</h1>", unsafe_allow_html=True)
 st.write("### Upload an image to get started:")
 
-# Show current counts in center
-counts = read_counts()
-st.markdown(f"<h3 style='text-align:center;'>Chapri: {counts['Chapri']} | Decent: {counts['Decent']}</h3>", unsafe_allow_html=True)
-
 # ------------------- FILE UPLOAD -------------------
 uploaded_file = st.file_uploader(
     "Choose an image...",
@@ -58,6 +54,13 @@ uploaded_file = st.file_uploader(
 
 # ------------------- PREDICTION -------------------
 if uploaded_file is not None:
+    # Read current counts
+    counts = read_counts()
+    st.markdown(
+        f"<h4 style='text-align:center;'>App used Chapri: {counts['Chapri']} | Decent: {counts['Decent']}</h4>",
+        unsafe_allow_html=True
+    )
+
     col1, col2 = st.columns([1, 1.2])  # Left: Image | Right: Prediction
 
     with col1:
@@ -81,7 +84,10 @@ if uploaded_file is not None:
 
         # Refresh counts in center
         counts = read_counts()
-        st.markdown(f"<h3 style='text-align:center;'>Chapri: {counts['Chapri']} | Decent: {counts['Decent']}</h3>", unsafe_allow_html=True)
+        st.markdown(
+            f"<h4 style='text-align:center;'>App used Chapri: {counts['Chapri']} | Decent: {counts['Decent']}</h4>",
+            unsafe_allow_html=True
+        )
 
 # ------------------- FOOTER -------------------
 st.markdown("<hr>", unsafe_allow_html=True)
