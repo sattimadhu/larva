@@ -72,6 +72,6 @@ if uploaded_file is not None:
 # ------------------- FOOTER -------------------
 st.markdown("<hr>", unsafe_allow_html=True)
 st.markdown(
-    "<p style='text-align: center; color: gray;'>Developed with Love & Larva</p>",
+    "<p style='text-align: center; color: gray;'>Developed with <span style="color:#fa003f">Love & Larva</span></p>",
     unsafe_allow_html=True
 )
