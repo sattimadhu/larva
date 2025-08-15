@@ -56,10 +56,10 @@ uploaded_file = st.file_uploader(
 if uploaded_file is not None:
     # Read current counts
     counts = read_counts()
-    st.markdown(
-        f"<h4 style='text-align:center;'>App used Chapri: {counts['Chapri']} | Decent: {counts['Decent']}</h4>",
-        unsafe_allow_html=True
-    )
+    # st.markdown(
+    #     f"<h4 style='text-align:center;'>App used Chapri: {counts['Chapri']} | Decent: {counts['Decent']}</h4>",
+    #     unsafe_allow_html=True
+    # )
 
     col1, col2 = st.columns([1, 1.2])  # Left: Image | Right: Prediction
 
