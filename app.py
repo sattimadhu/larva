@@ -5,8 +5,8 @@ from PIL import Image
 
 # ------------------- PAGE CONFIG -------------------
 st.set_page_config(
-    page_title="Binary CNN Classifier",
-    page_icon="🖼️",
+    page_title="YouLarva",
+    page_icon="🐛",
     layout="centered",
     initial_sidebar_state="expanded"
 )
@@ -34,7 +34,7 @@ img_size = (width, height)
 # st.sidebar.write("Confidence score will be displayed after prediction.")
 
 # ------------------- MAIN TITLE -------------------
-st.markdown("<h1 style='color: #4CAF50;'>Binary Image Classifier</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='color: #4CAF50;'>YouLarva</h1>", unsafe_allow_html=True)
 st.write("### Upload an image to get started:")
 
 # ------------------- FILE UPLOAD -------------------
