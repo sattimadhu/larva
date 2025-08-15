@@ -83,11 +83,11 @@ if uploaded_file is not None:
         st.write(f"**Confidence:** {confidence:.2%}")
 
         # Refresh counts in center
-        counts = read_counts()
-        st.markdown(
-            f"<h4 style='text-align:center; color:#fa003f'>Chapri:<span style:'color:white'> {counts['Chapri']}</span> | Decent: <span style:'color:white'>{counts['Decent']}</span></h4>",
-            unsafe_allow_html=True
-        )
+        # counts = read_counts()
+        # st.markdown(
+        #     f"<h4 style='text-align:center; color:#fa003f'>Chapri:<span style:'color:white'> {counts['Chapri']}</span> | Decent: <span style:'color:white'>{counts['Decent']}</span></h4>",
+        #     unsafe_allow_html=True
+        # )
 
 # ------------------- FOOTER -------------------
 st.markdown("<hr>", unsafe_allow_html=True)
