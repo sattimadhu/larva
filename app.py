@@ -56,10 +56,6 @@ uploaded_file = st.file_uploader(
 if uploaded_file is not None:
     # Read current counts
     counts = read_counts()
-    # st.markdown(
-    #     f"<h4 style='text-align:center;'>App used Chapri: {counts['Chapri']} | Decent: {counts['Decent']}</h4>",
-    #     unsafe_allow_html=True
-    # )
 
     col1, col2 = st.columns([1, 1.2])  # Left: Image | Right: Prediction
 
@@ -86,6 +82,43 @@ if uploaded_file is not None:
         counts = read_counts()
         st.markdown(
             f"<h4 style='text-align:center; color:#fa003f'>Chapri: {counts['Chapri']} | Decent: {counts['Decent']}</h4>",
+            unsafe_allow_html=True
+        )
+
+        # ------------------- EMOJI RAIN -------------------
+        emoji_map = {
+            "Decent": ["🦋","🌱","💚","🍃"],
+            "Chapri": ["🐛","🪱","🐞","🍂"]
+        }
+        st.markdown(
+            f"""
+            <style>
+            @keyframes fall {{
+                0% {{top: -50px; opacity: 1;}}
+                100% {{top: 100%; opacity: 0;}}
+            }}
+            .emoji {{
+                position: fixed;
+                font-size: 2rem;
+                animation: fall linear infinite;
+                z-index: 9999;
+                pointer-events: none;
+            }}
+            </style>
+            <script>
+            const emojis = {emoji_map[class_label]};
+            const num = 20;
+            for(let i=0;i<num;i++){{
+                let span = document.createElement("span");
+                span.className = "emoji";
+                span.style.left = Math.random()*100 + "vw";
+                span.style.animationDuration = (3 + Math.random()*2) + "s";
+                span.style.fontSize = (20 + Math.random()*20) + "px";
+                span.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+                document.body.appendChild(span);
+            }}
+            </script>
+            """,
             unsafe_allow_html=True
         )
 
