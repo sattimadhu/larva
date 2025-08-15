@@ -10,7 +10,7 @@ st.set_page_config(
     page_title="YouLarva",
     page_icon="🐛",
     layout="centered",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="collapsed"
 )
 
 # ------------------- JSON FILE FOR COUNT -------------------
@@ -21,12 +21,11 @@ if not os.path.exists(COUNT_FILE):
     with open(COUNT_FILE, "w") as f:
         json.dump({"Chapri": 0, "Decent": 0}, f)
 
-# Function to read counts
+# Functions to read and update counts
 def read_counts():
     with open(COUNT_FILE, "r") as f:
         return json.load(f)
 
-# Function to update counts
 def update_count(label):
     counts = read_counts()
     counts[label] += 1
@@ -36,23 +35,19 @@ def update_count(label):
 # ------------------- LOAD MODEL -------------------
 @st.cache_resource
 def load_model():
-    return tf.keras.models.load_model("chapri_decent.h5")  # Your trained model
+    return tf.keras.models.load_model("chapri_decent.h5")
 
 model = load_model()
-
-# Detect model input size dynamically
 _, height, width, channels = model.input_shape
 img_size = (width, height)
 
 # ------------------- MAIN TITLE -------------------
-st.markdown("<h1 style='color: #4CAF50;'>YouLarva</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align:center; color: #4CAF50;'>YouLarva</h1>", unsafe_allow_html=True)
 st.write("### Upload an image to get started:")
 
-# Show current counts
+# Show current counts in center
 counts = read_counts()
-st.sidebar.subheader("📊 Prediction Counts")
-st.sidebar.write(f"Chapri: **{counts['Chapri']}**")
-st.sidebar.write(f"Decent: **{counts['Decent']}**")
+st.markdown(f"<h3 style='text-align:center;'>Chapri: {counts['Chapri']} | Decent: {counts['Decent']}</h3>", unsafe_allow_html=True)
 
 # ------------------- FILE UPLOAD -------------------
 uploaded_file = st.file_uploader(
@@ -84,15 +79,13 @@ if uploaded_file is not None:
         st.progress(float(confidence))
         st.write(f"**Confidence:** {confidence:.2%}")
 
-        # Refresh counts after update
+        # Refresh counts in center
         counts = read_counts()
-        st.sidebar.subheader("📊 Prediction Counts")
-        st.sidebar.write(f"Chapri: **{counts['Chapri']}**")
-        st.sidebar.write(f"Decent: **{counts['Decent']}**")
+        st.markdown(f"<h3 style='text-align:center;'>Chapri: {counts['Chapri']} | Decent: {counts['Decent']}</h3>", unsafe_allow_html=True)
 
 # ------------------- FOOTER -------------------
 st.markdown("<hr>", unsafe_allow_html=True)
 st.markdown(
-    "<p style='text-align: center; color: gray;'>Developed with <span style='color:#fa003f'>Love & Larva</span></p>",
+    "<p style='text-align: center; color: gray; font-weight:bold;'>Developed with <span style='color:#fa003f'>Love & Larva</span></p>",
     unsafe_allow_html=True
 )
