@@ -42,7 +42,7 @@ _, height, width, channels = model.input_shape
 img_size = (width, height)
 
 # ------------------- MAIN TITLE -------------------
-st.markdown("<h1 style='text-align:center; color: #4CAF50;'>YouLarva</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align:center; color: #fa003f;'>YouLarva</h1>", unsafe_allow_html=True)
 st.write("### Upload an image to get started:")
 
 # ------------------- FILE UPLOAD -------------------
@@ -56,6 +56,10 @@ uploaded_file = st.file_uploader(
 if uploaded_file is not None:
     # Read current counts
     counts = read_counts()
+    # st.markdown(
+    #     f"<h4 style='text-align:center;'>App used Chapri: {counts['Chapri']} | Decent: {counts['Decent']}</h4>",
+    #     unsafe_allow_html=True
+    # )
 
     col1, col2 = st.columns([1, 1.2])  # Left: Image | Right: Prediction
 
@@ -82,59 +86,6 @@ if uploaded_file is not None:
         counts = read_counts()
         st.markdown(
             f"<h4 style='text-align:center; color:#fa003f'>Chapri: {counts['Chapri']} | Decent: {counts['Decent']}</h4>",
-            unsafe_allow_html=True
-        )
-
-        # ------------------- EMOJI RAIN PARALLAX -------------------
-        st.markdown(
-            """
-            <style>
-            .emoji {
-                position: fixed;
-                top: -50px;
-                pointer-events: none;
-                opacity: 0.8;
-                animation-name: fall;
-                animation-iteration-count: infinite;
-                animation-timing-function: linear;
-                z-index: 9999;
-            }
-
-            @keyframes fall {
-                0% { transform: translateY(0px); }
-                100% { transform: translateY(110vh); }
-            }
-            </style>
-            <script>
-            const emojis = ["🐛","🦋","🌱","🍃","💚","🐞","🪱"];
-            const numEmojis = 50;
-
-            function random(min, max) {
-                return Math.random() * (max - min) + min;
-            }
-
-            for(let i=0; i<numEmojis; i++) {
-                let span = document.createElement("span");
-                span.className = "emoji";
-                span.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-                document.body.appendChild(span);
-
-                // Random horizontal position
-                span.style.left = random(0, 100) + "vw";
-
-                // Random size for parallax effect
-                const size = random(15, 50);
-                span.style.fontSize = size + "px";
-
-                // Random speed
-                const duration = random(3, 10);
-                span.style.animationDuration = duration + "s";
-
-                // Random delay
-                span.style.animationDelay = random(0, 10) + "s";
-            }
-            </script>
-            """,
             unsafe_allow_html=True
         )
 
