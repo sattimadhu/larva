@@ -85,38 +85,54 @@ if uploaded_file is not None:
             unsafe_allow_html=True
         )
 
-        # ------------------- EMOJI RAIN -------------------
-        emoji_map = {
-            "Decent": ["🦋","🌱","💚","🍃"],
-            "Chapri": ["🐛","🪱","🐞","🍂"]
-        }
+        # ------------------- EMOJI RAIN PARALLAX -------------------
         st.markdown(
-            f"""
+            """
             <style>
-            @keyframes fall {{
-                0% {{top: -50px; opacity: 1;}}
-                100% {{top: 100%; opacity: 0;}}
-            }}
-            .emoji {{
+            .emoji {
                 position: fixed;
-                font-size: 2rem;
-                animation: fall linear infinite;
-                z-index: 9999;
+                top: -50px;
                 pointer-events: none;
-            }}
+                opacity: 0.8;
+                animation-name: fall;
+                animation-iteration-count: infinite;
+                animation-timing-function: linear;
+                z-index: 9999;
+            }
+
+            @keyframes fall {
+                0% { transform: translateY(0px); }
+                100% { transform: translateY(110vh); }
+            }
             </style>
             <script>
-            const emojis = {emoji_map[class_label]};
-            const num = 20;
-            for(let i=0;i<num;i++){{
+            const emojis = ["🐛","🦋","🌱","🍃","💚","🐞","🪱"];
+            const numEmojis = 50;
+
+            function random(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            for(let i=0; i<numEmojis; i++) {
                 let span = document.createElement("span");
                 span.className = "emoji";
-                span.style.left = Math.random()*100 + "vw";
-                span.style.animationDuration = (3 + Math.random()*2) + "s";
-                span.style.fontSize = (20 + Math.random()*20) + "px";
-                span.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+                span.innerText = emojis[Math.floor(Math.random() * emojis.length)];
                 document.body.appendChild(span);
-            }}
+
+                // Random horizontal position
+                span.style.left = random(0, 100) + "vw";
+
+                // Random size for parallax effect
+                const size = random(15, 50);
+                span.style.fontSize = size + "px";
+
+                // Random speed
+                const duration = random(3, 10);
+                span.style.animationDuration = duration + "s";
+
+                // Random delay
+                span.style.animationDelay = random(0, 10) + "s";
+            }
             </script>
             """,
             unsafe_allow_html=True
